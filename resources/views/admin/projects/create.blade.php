@@ -47,12 +47,12 @@
                 <label for="image" class="form-label">Add Image</label>
                 <input class="form-control" type="file" id="formFile" name="image">
             </div> 
-            <h4>Technology</h4>
-            <div>
+            <div class="mb-3">
+                <div>Technology</div>
                 @foreach ($technologies as $technology)
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="technologies" value="{{$technology->id}}" name="technologies[]" {{in_array($technology->id, old('technologies',[])) ? 'checked' : ''}}>
-                    <label class="form-check-label" for="technologies">{{$technology->name}}</label>
+                    <input class="form-check-input" type="checkbox" name="technologies[]" id="technologies" value="{{ $technology->id }}" {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="technologies">{{ $technology->name }}</label>
                 </div>
                 @endforeach
             </div>

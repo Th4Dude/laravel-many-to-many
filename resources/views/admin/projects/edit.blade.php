@@ -44,15 +44,40 @@
         @endforeach
     </div>
 
-
-
-
-
         <div class="mb-3">
             <label for="image" class="form-label">Add Image</label>
             <input class="form-control" type="file" id="formFile" name="image">
         </div> 
         
+        @if ($errors->any())
+
+            <div class="mb-3">
+                <div>Technology</div>
+                @foreach ($technologies as $technology)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="technologies[]" id="technologies" value="{{ $technology->id }}" {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="technologies">{{ $technology->name }}</label>
+                </div>
+                @endforeach
+            </div>
+
+        @else
+        
+            <div class="mb-3">
+                <div>Technology</div>
+                @foreach ($technologies as $technology)
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="technologies[]" id="technologies" value="{{ $technology->id }}" {{ $project->technologies->contains($technology->id) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="technologies">{{ $technology->name }}</label>
+                    </div>
+                @endforeach
+            </div>
+
+        @endif
+
+
+
+
         <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
     </form>
 </div>

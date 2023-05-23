@@ -58,7 +58,12 @@ class ProjectController extends Controller
         if(isset ($data['image'])){
             $new_project->image = Storage::put('uploads', $data['image']);
         }
+
         $new_project->save();
+
+        if(isset($data['technologies'])){
+            $new_project->technologies()->sync($data['technologies']);
+        }
 
         return to_route('admin.projects.show', $new_project->id)->with('message', 'Progetto creato');
     }
@@ -82,8 +87,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+
         $types=Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types','technologies'));
     }
 
     /**
@@ -111,6 +118,13 @@ class ProjectController extends Controller
         
         $project->image = $newImagePath;
     }
+
+    if(isset($data['technologies'])){
+        $project->technologies()->sync($data['technologies']);
+    } else{
+        $project->technologies()->detach();
+    }
+
 
     $project->update($data);
     $project->slug = Str::slug($data['title']);
