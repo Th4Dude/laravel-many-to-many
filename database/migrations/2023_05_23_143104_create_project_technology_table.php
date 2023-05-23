@@ -14,7 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('project_technology', function (Blueprint $table) {
-            $table->id();
+
+
+            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('technology_id')->constrained()->cascadeOnDelete();
+            
+            
+
+            $table->primary(['project_id', 'technology_id']);
+
             $table->timestamps();
         });
     }
