@@ -27,9 +27,9 @@
 
             <tbody>
 
-                <tr>
+                <tr class="project-row">
 
-                    <th scope="row">{{$project->id}}</th>
+                    <th>{{$project->id}}</th>
                     <td>{{$project->title}}</td>
                     <td>{{$project->description}}</td>
                     <td>{{ $project->type?->name ?: 'No selection' }}</td>
