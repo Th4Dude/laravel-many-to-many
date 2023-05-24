@@ -13,6 +13,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
                 <th scope="col">Type</th>
+                <th scope="col">Technology</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
                 <th scope="col">Slug</th>
@@ -32,6 +33,11 @@
                     <td>{{$project->title}}</td>
                     <td>{{$project->description}}</td>
                     <td>{{ $project->type?->name ?: 'No selection' }}</td>
+                    <td>
+                      @foreach ($project->technologies as $technology)
+                      {{ $technology->name }}
+                      @endforeach
+                    </td>
                     <td>{{$project->start_date}}</td>
                     <td>{{$project->end_date}}</td>
                     <td>{{$project->slug}}</td>
